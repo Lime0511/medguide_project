@@ -1,0 +1,7 @@
+{
+  "name": "medguide",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
