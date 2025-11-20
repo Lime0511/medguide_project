@@ -1,0 +1,447 @@
+
+ion-title,
+ion-label,
+h1, h2, h3 {
+    font-weight: 700 !important;
+    text-shadow:
+        0.5px 0 #0002,
+        -0.5px 0 #0002,
+        0 0.5px #0002,
+        0 -0.5px #0002;
+}
+
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+/* --- Custom Global Styles --- */
+
+body {
+    /* Sets the background color for the entire viewport (the HTML <body> element).
+       This is the "most behind" background and should match your ion-content background 
+       to ensure a cohesive look across the entire app window. */
+    background: #eaf9ff; 
+}
+
+:root {
+  --ion-color-primary: #77cef3;
+}
+
+/* ============================
+   REAL DARK THEME
+   ============================ */
+
+
+
+
+/* ─────────────────────────────
+   MENU DARK MODE
+   ───────────────────────────── */
+body.dark ion-menu {
+  --background: var(--menu-bg);
+  backdrop-filter: blur(12px);
+}
+
+body.dark .menu-profile {
+  background: var(--menu-card-bg) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.55);
+}
+
+body.dark .menu-list ion-item {
+  background: var(--menu-card-bg);
+  color: #e5e7eb !important;
+  border: 1px solid var(--border-color);
+}
+
+body.dark .menu-list ion-item.active {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+body.dark .menu-icon {
+  color: #9db4ff !important;
+}
+
+body.dark .menu-footer ion-item {
+  background: rgba(255, 80, 80, 0.12);
+}
+
+/* ─────────────────────────────
+   HOME CARDS
+   ───────────────────────────── */
+body.dark .med-card {
+  background: #1b1c1f !important;
+  border: 1px solid rgba(255,255,255,0.05);
+  color: #e5e7eb !important;
+}
+
+body.dark ion-card {
+  --background: #1a1b1e !important;
+  --color: #e8ebf0 !important;
+}
+
+
+body.dark ion-button {
+  --background: #3b82f6;
+  --color: white;
+}
+
+body.dark ion-button.outline {
+  --background: transparent;
+  --border-color: #3b82f6;
+  --color: #3b82f6;
+}
+
+body.dark ion-label,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark p,
+body.dark span {
+  color: #e8ebf0 !important;
+}
+
+/* =========================
+   DARK THEME – GLOBAL PALETTE
+   ========================= */
+body.dark {
+  /* Main background + surface colors */
+  --app-bg: #05080d;
+  --app-surface: #111827;       /* cards */
+  --app-surface-soft: #020617;  /* page background */
+  --app-surface-alt: #1f2937;   /* slightly brighter card */
+
+  /* Text */
+  --app-text-main: #f9fafb;
+  --app-text-muted: #9ca3af;
+  --app-text-subtle: #6b7280;
+
+  /* Primary & accents (keep your medical blue vibes) */
+  --ion-color-primary: #3b82f6;  /* buttons, links */
+  --ion-color-primary-contrast: #ffffff;
+
+  /* Card borders / separators */
+  --app-border-subtle: rgba(148, 163, 184, 0.35);
+}
+
+
+/* Whole app background when dark */
+body.dark ion-content {
+  --background: radial-gradient(circle at top left, #0b1220 0, #020617 55%, #000 100%);
+  color: var(--app-text-main);
+}
+
+/* Top header bar – keep blue but darker */
+body.dark ion-toolbar {
+  --background: linear-gradient(90deg, #0f172a, #1d4ed8 60%, #0891b2);
+  --color: #e5e7eb;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.6);
+}
+
+/* Timeline / Reminder cards */
+body.dark-theme .timeline-card,
+body.dark-theme .reminder-card,
+body.dark-theme .notification-card {
+  background: radial-gradient(circle at 0 0, #111827 0, #020617 60%);
+  border-radius: 18px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* Faded secondary text inside those cards */
+body.dark-theme .timeline-card .meta,
+body.dark-theme .reminder-card .meta {
+  color: #9ca3af;
+}
+
+/* Titles inside cards */
+body.dark ion-card-title,
+body.dark .card-title {
+  color: #e5e7eb;
+}
+
+/* Subtext / captions */
+body.dark ion-card-subtitle,
+body.dark .card-subtitle,
+body.dark .muted {
+  color: var(--app-text-muted);
+}
+
+
+/* Shell */
+body.dark .side-menu {
+  --background: transparent;
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.9);
+}
+
+/* Menu background */
+body.dark .side-menu ion-content {
+  --background: linear-gradient(180deg, #020617 0%, #020617 30%, #020617 100%);
+}
+
+/* Profile block */
+body.dark .menu-profile {
+  background: radial-gradient(circle at top, #0b1120 0, #020617 60%);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(31, 41, 55, 0.9);
+}
+
+body.dark .menu-profile .name {
+  color: var(--app-text-main);
+}
+body.dark .menu-profile .email {
+  color: var(--app-text-muted);
+}
+
+/* Nav items */
+body.dark .menu-list ion-item {
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(30, 64, 175, 0.45);
+}
+
+body.dark .menu-list ion-item ion-label {
+  color: var(--app-text-main);
+}
+
+body.dark .menu-list ion-item .menu-icon {
+  color: #9ca3af;
+}
+
+/* Active nav item */
+body.dark .menu-list ion-item.active {
+  background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+  box-shadow:
+    0 18px 35px rgba(37, 99, 235, 0.6),
+    0 0 0 1px rgba(191, 219, 254, 0.9);
+}
+body.dark .menu-list ion-item.active ion-label {
+  color: #f9fafb;
+}
+body.dark .menu-list ion-item.active .menu-icon {
+  color: #bfdbfe;
+}
+
+/* Logout button tweak */
+body.dark .menu-footer ion-item {
+  background: rgba(127, 29, 29, 0.95);
+  box-shadow:
+    0 10px 26px rgba(127, 29, 29, 0.8),
+    0 0 0 1px rgba(254, 202, 202, 0.9);
+}
+body.dark .menu-footer ion-item ion-label {
+  color: #fee2e2;
+}
+
+/* General text color */
+body.dark {
+  color: var(--app-text-main);
+}
+
+body.dark ion-item,
+body.dark ion-input,
+body.dark ion-select,
+body.dark ion-textarea {
+  --background: #020617;
+  --color: var(--app-text-main);
+  --placeholder-color: var(--app-text-subtle);
+  --border-color: var(--app-border-subtle);
+}
+
+/* Buttons keep blue but a bit deeper */
+body.dark ion-button {
+  --background: #2563eb;
+  --background-activated: #1d4ed8;
+  --color: #f9fafb;
+}
+
+
+/* ---------------------------
+   DARK THEME – GLOBAL TOKENS
+   --------------------------- */
+
+body.dark-theme {
+  /* Core Ionic vars */
+  --ion-background-color: #020617;   /* overall page bg */
+  --ion-text-color: #e5e7eb;
+  --ion-color-primary: #3b82f6;      /* same blue as light mode, looks good on dark */
+  --ion-border-color: rgba(148, 163, 184, 0.35);
+}
+
+/* Background for every ion-content */
+body.dark-theme ion-content {
+  --background: radial-gradient(circle at 0% 0%, #0f172a 0, #020617 45%, #000 100%);
+  color: #e5e7eb;
+}
+
+/* Titles / generic text */
+body.dark-theme ion-title,
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4 {
+  color: #f9fafb !important;
+}
+
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme ion-label {
+  color: #e5e7eb;
+}
+
+/* Dashboard / section cards (home + settings + profile) */
+body.dark-theme ion-card,
+body.dark-theme .dashboard-card,
+body.dark-theme .settings-section-card,
+body.dark-theme .profile-card {
+  --background: #020617;
+  background: radial-gradient(circle at 0 0, #111827 0, #020617 55%, #020617 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* Small statistic tiles (TOTAL / TAKEN / UPCOMING / MISSED) */
+body.dark-theme .metric-card,
+body.dark-theme .stat-card {
+  background: linear-gradient(135deg, #111827, #020617);
+  border-radius: 16px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  box-shadow:
+    0 16px 32px rgba(15, 23, 42, 0.85),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+body.dark-theme .metric-label {
+  color: #9ca3af;
+}
+
+body.dark-theme .metric-value {
+  color: #f9fafb;
+}
+
+/* Inputs / selects / rows (Settings + Profile) */
+body.dark-theme ion-item {
+  --background: transparent;
+  --border-color: rgba(75, 85, 99, 0.9);
+  color: #e5e7eb;
+}
+
+body.dark-theme ion-input,
+body.dark-theme ion-select,
+body.dark-theme ion-textarea {
+  --background: #020617;
+  --color: #e5e7eb;
+}
+
+/* Buttons */
+body.dark-theme ion-button {
+  --background: #2563eb;
+  --background-activated: #1d4ed8;
+  --background-focused: #1d4ed8;
+  --color: #f9fafb;
+  --border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* Destructive button ("DELETE ACCOUNT" etc.) */
+body.dark-theme ion-button.danger,
+body.dark-theme .danger-button {
+  --background: #b91c1c;
+  --background-activated: #991b1b;
+}
+
+/* Sidebar shell */
+body.dark-theme .side-menu {
+  --background: #020617;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+}
+
+/* Sidebar content background */
+body.dark-theme .side-menu ion-content {
+  --background: linear-gradient(180deg, #020617 0%, #020617 60%, #020617 100%);
+}
+
+/* Profile block in sidebar */
+body.dark-theme .menu-profile {
+  background: radial-gradient(circle at 0 0, #111827 0, #020617 55%);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(30, 64, 175, 0.7);
+}
+
+/* Sidebar nav items */
+body.dark-theme .menu-list ion-item {
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(31, 41, 55, 0.9);
+}
+
+body.dark-theme .menu-list ion-item.active {
+  background: linear-gradient(135deg, #1d4ed8, #0f172a);
+  box-shadow:
+    0 18px 40px rgba(37, 99, 235, 0.45),
+    0 0 0 1px rgba(147, 197, 253, 0.9);
+}
+
+body.dark-theme .menu-list ion-item.active ion-label {
+  color: #f9fafb;
+}
+
+body.dark-theme .menu-icon {
+  color: #9ca3af;
+}
+
+body.dark-theme .menu-list ion-item.active .menu-icon {
+  color: #e5e7eb;
+}
+
+
+:root {
+  --ion-font-family: 'Poppins', sans-serif;
+}
+
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
