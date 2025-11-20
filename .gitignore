@@ -1,29 +1,34 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+# Temporary files
 *~
 *.sw[mnpcod]
-.tmp
 *.tmp
+.tmp
 *.tmp.*
-UserInterfaceState.xcuserstate
+log.txt
+*.log
+
+# Recycle Bin (Windows)
 $RECYCLE.BIN/
 
-*.log
-log.txt
-
-
+# Source maps & versions
 /.sourcemaps
 /.versions
 /coverage
 
-# Ionic
+# Ionic-specific
 /.ionic
 /www
 /platforms
 /plugins
 
-# Compiled output
+# Capacitor generated platforms
+/android
+/ios
+
+# Angular build output
 /dist
 /tmp
 /out-tsc
@@ -44,7 +49,7 @@ yarn-error.log
 *.sublime-project
 *.sublime-workspace
 
-# Visual Studio Code
+# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -52,15 +57,17 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-
-# Miscellaneous
+# Angular internal
 /.angular
 /.angular/cache
-.sass-cache/
 /.nx
 /.nx/cache
+
+# Sass cache
+.sass-cache/
+
+# Lock files & misc
 /connect.lock
-/coverage
 /libpeerconnection.log
 testem.log
 /typings
@@ -68,3 +75,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Browser-generated preview files (optional, recommended)
+*.avif.html
+*.brave.html
