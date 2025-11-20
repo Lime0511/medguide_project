@@ -41,7 +41,6 @@ This installs:
 - npm (Node Package Manager)
 
 Verify:
-```bash
 node -v
 npm -v
 
