@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- APPEARANCE -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Appearance</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Dark Mode</ion-label>
+        <ion-toggle
+          [checked]="isDarkMode"
+          (ionChange)="onDarkModeToggle($event)">
+        </ion-toggle>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- NOTIFICATIONS -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Notifications</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Reminder Sound</ion-label>
+        <ion-select [(ngModel)]="selectedSound" (ionChange)="saveNotificationSound()">
+          <ion-select-option value="default">Default</ion-select-option>
+          <ion-select-option value="beep">Beep</ion-select-option>
+          <ion-select-option value="chime">Chime</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- STORAGE -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Data Management</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button expand="block" color="warning" (click)="clearCache()">
+        Clear Cached Data
+      </ion-button>
+      <ion-button expand="block" color="danger" (click)="clearAllStorage()">
+        Clear All Local Storage
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- ABOUT -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>About This App</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p><strong>App Name:</strong> MedGuide</p>
+      <p><strong>Version:</strong> 1.0.0</p>
+      <p><strong>Developer:</strong> Juhi • Raj • Qi Yun • Ehang for BAI13123 - Mobile Application Development</p>
+      <p><strong>Last Updated:</strong> Nov 2025</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

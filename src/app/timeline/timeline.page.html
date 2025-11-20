@@ -1,0 +1,152 @@
+<!-- <ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Activity Timeline</ion-title>
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Activity Timeline</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+    <!-- Selection Toolbar -->
+    <div class="selection-bar" *ngIf="isSelectionMode">
+        <p>{{ selectedLogs.size }} selected</p>
+
+        <!-- Select All -->
+        <ion-button size="small" fill="outline" (click)="selectAll()">
+            Select All
+        </ion-button>
+
+        <!-- Delete Selected -->
+        <ion-button size="small" color="danger" (click)="deleteSelected()" [disabled]="selectedLogs.size === 0">
+            Delete
+        </ion-button>
+
+        <!-- Exit selection mode -->
+        <ion-button size="small" fill="clear" (click)="exitSelectionMode()">
+            Cancel
+        </ion-button>
+    </div>
+
+    <!-- Normal Mode: show “Select” button -->
+    <div class="selection-bar" *ngIf="!isSelectionMode">
+        <ion-button size="small" fill="outline" (click)="enterSelectionMode()">
+            Select
+        </ion-button>
+    </div>
+
+    <!-- Floating Search Bar -->
+    <div class="floating-search">
+        <ion-item lines="none">
+            <ion-icon name="search-outline" slot="start"></ion-icon>
+            <ion-input placeholder="Search activity..." [(ngModel)]="searchText" (ionInput)="applyFilters()">
+            </ion-input>
+        </ion-item>
+    </div>
+
+    <!-- Segment Filter -->
+    <ion-segment [(ngModel)]="segment" (ionChange)="applyFilters()">
+        <ion-segment-button value="today"><ion-label>Today</ion-label></ion-segment-button>
+        <ion-segment-button value="week"><ion-label>This Week</ion-label></ion-segment-button>
+        <ion-segment-button value="all"><ion-label>All</ion-label></ion-segment-button>
+    </ion-segment>
+
+    <!-- Empty State -->
+    <div *ngIf="groupedLogs.length === 0" class="empty-state">
+        <ion-icon name="time-outline"></ion-icon>
+        <p>No activity found.</p>
+    </div>
+
+    <div class="timeline">
+
+        <div *ngFor="let group of groupedLogs" class="timeline-group">
+
+            <!-- COLLAPSIBLE DATE HEADER -->
+            <div class="date-header" (click)="toggleGroup(group.date)">
+                {{ group.date }}
+                <ion-icon name="chevron-down-outline" [class.rotated]="!isCollapsed(group.date)">
+                </ion-icon>
+            </div>
+
+            <!-- Collapsible Content -->
+            <div *ngIf="!isCollapsed(group.date)" class="collapse-wrapper">
+
+                <div *ngFor="let log of group.items" class="timeline-item" [class.selected]="selectedLogs.has(log.id)"
+                    (click)="onLogClick(log, $event)" (mousedown)="startPress(log, $event)"
+                    (touchstart)="startPress(log, $event)" (mouseup)="cancelPress()" (mouseleave)="cancelPress()"
+                    (touchend)="cancelPress()" (touchcancel)="cancelPress()">
+
+                    <ion-item-sliding (ionDrag)="onDrag()">
+
+                        <!-- MAIN ROW (log entry) -->
+                        <ion-item lines="none">
+
+                            <div class="timeline-item">
+
+                                <!-- Colored Marker -->
+                                <div class="timeline-marker">
+                                    <div class="dot" [style.background]="getColor(log.action)"></div>
+                                    <div class="line" [style.background]="getColor(log.action)"></div>
+                                </div>
+
+                                <div class="checkmark" *ngIf="isSelectionMode">
+                                    <ion-icon
+                                        [name]="selectedLogs.has(log.id) ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
+                                </div>
+
+                                <ion-card class="entry-card">
+
+                                    <div class="checkmark" *ngIf="isSelectionMode">
+                                        <ion-icon
+                                            [name]="selectedLogs.has(log.id) ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
+                                    </div>
+
+
+                                    <ion-card-content>
+
+                                        <div class="entry-header">
+                                            <ion-icon [name]="getIcon(log.action)"
+                                                [style.color]="getColor(log.action)"></ion-icon>
+                                            <h3>{{ log.action }}</h3>
+                                        </div>
+
+                                        <p class="details">{{ log.details }}</p>
+                                        <p class="time">{{ log.time }}</p>
+
+                                    </ion-card-content>
+                                </ion-card>
+                            </div>
+
+                        </ion-item>
+
+                        <!-- DELETE + SHARE options -->
+                        <ion-item-options side="end">
+
+                            <!-- DELETE -->
+                            <ion-item-option color="danger" (click)="deleteLog(log)">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </ion-item-option>
+
+                            <!-- SHARE -->
+                            <ion-item-option color="primary" (click)="shareSpecificMed(log)">
+                                <ion-icon name="share-outline"></ion-icon>
+                            </ion-item-option>
+
+                        </ion-item-options>
+
+
+
+                    </ion-item-sliding>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

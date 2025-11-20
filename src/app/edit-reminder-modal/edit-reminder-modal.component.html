@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Edit Reminder Time</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Select New Time</ion-label>
+    <ion-datetime presentation="time" [(ngModel)]="newTime" hourCycle="h23">
+    </ion-datetime>
+  </ion-item>
+
+  <ion-button expand="block" color="success" (click)="save()">Save Changes</ion-button>
+</ion-content>

@@ -1,0 +1,300 @@
+<ng-container *ngIf="isPageReady; else loading">
+
+  <!-- 🔷 TOP BAR -->
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+      </ion-title>
+      <ion-buttons slot="primary">
+        <!-- Button to show interstitial ad -->
+        <ion-button (click)="showInterstitialAd()">Show Interstitial</ion-button>
+        <!-- Button to simulate Pro purchase and disable ads -->
+        <ion-button (click)="goPro()" color="success">Go Pro</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- 🌈 BACKGROUND + OVERLAY -->
+  <ion-content class="background-image">
+
+    <div class="content-overlay ion-padding">
+
+      <!-- Offline Banner -->
+      <ion-item *ngIf="offline" color="warning" class="offline-banner">
+        <ion-label>⚠️ You are offline — showing cached data.</ion-label>
+      </ion-item>
+
+      <div class="glance-pill fade-in-up">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ totalToday }} meds · {{ upcomingToday }} upcoming · {{ missedToday }} missed</span>
+
+        <!-- optional link to timeline -->
+        <a routerLink="/timeline">View Logs</a>
+      </div>
+
+
+      <!-- ============================
+           HERO ROW (Next Med + Adherence)
+           ============================ -->
+      <div class="hero-row">
+
+        <!-- NEXT MEDICATION CARD -->
+        <ion-card class="glass-card next-card" *ngIf="nextMed">
+          <ion-card-content>
+            <div class="section-title">
+              <ion-icon name="time-outline"></ion-icon>
+              <span>Next Medication</span>
+            </div>
+
+            <div class="next-med-info">
+              <h2>{{ nextMed.name }}</h2>
+              <p class="next-dosage">{{ nextMed.dosage }}</p>
+
+              <div class="pill-time">
+                <ion-icon name="alarm-outline"></ion-icon>
+                <span>{{ nextMed.time }}</span>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- ADHERENCE RING -->
+        <div class="adherence-wrapper glass-chip">
+          <div class="progress-ring">
+            <svg>
+              <circle class="bg" cx="60" cy="60" r="50"></circle>
+              <circle class="progress" cx="60" cy="60" r="50" [attr.stroke-dashoffset]="dashOffset">
+              </circle>
+            </svg>
+            <div class="center-text">{{ adherence }}%</div>
+          </div>
+          <p class="adherence-label">Today's Adherence</p>
+        </div>
+
+        <div class="streak-box fade-in-up">
+          🔥 {{ streak }} day streak
+          <small>Longest: {{ longestStreak }}</small>
+        </div>
+
+      </div>
+
+      <!-- ============================
+           SUMMARY STATS
+           ============================ -->
+      <div class="summary-row">
+        <ion-card class="glass-small fade-in">
+          <ion-card-content>
+            <p class="stat-label">Total</p>
+            <h3>{{ totalToday }}</h3>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="glass-small fade-in delay-1">
+          <ion-card-content>
+            <p class="stat-label">Taken</p>
+            <h3>{{ takenToday }}</h3>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="glass-small fade-in delay-2">
+          <ion-card-content>
+            <p class="stat-label">Upcoming</p>
+            <h3>{{ upcomingToday }}</h3>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="glass-small fade-in delay-3">
+          <ion-card-content>
+            <p class="stat-label">Missed</p>
+            <h3>{{ missedToday }}</h3>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <h2 class="section-header">Weekly Adherence</h2>
+
+      <canvas id="adherenceChart"></canvas>
+
+
+      <!-- ============================
+           TODAY'S MEDICATIONS
+           ============================ -->
+      <div class="section-block">
+        <div class="section-header-row">
+          <h2 class="section-header">Today's Medications</h2>
+
+          <ion-button fill="clear" size="small" routerLink="/timeline">
+            View today’s log
+          </ion-button>
+
+        </div>
+
+        <ion-list class="glass-list" *ngIf="todayMeds.length > 0; else noToday">
+
+          <ion-item-sliding *ngFor="let med of todayMeds">
+
+            <!-- MAIN ITEM -->
+            <ion-item lines="none" class="today-item">
+              <div class="status-strip" [ngClass]="{
+      taken: med.status === 'taken',
+      missed: med.status === 'missed',
+      upcoming: med.status === 'upcoming'
+    }"></div>
+
+              <ion-icon class="med-type-icon" [name]="getMedIcon(med)"></ion-icon>
+
+              <ion-label>
+                <h2>{{ med.name }}</h2>
+                <p>{{ med.dosage }} · {{ med.time }}</p>
+              </ion-label>
+
+              <ion-badge [color]="
+  med.status === 'taken' ? 'success' :
+  med.status === 'missed' ? 'danger' :
+  med.status === 'skipped' ? 'medium' :
+  'warning'
+">
+
+                {{ med.status | titlecase }}
+              </ion-badge>
+            </ion-item>
+
+            <!-- RIGHT SIDE OPTIONS -->
+            <ion-item-options side="end">
+
+              <!-- MARK TAKEN -->
+              <ion-item-option color="success" (click)="markTaken(med)">
+                <ion-icon name="checkmark-done-outline"></ion-icon>
+              </ion-item-option>
+
+              <!-- SKIP DOSE -->
+              <ion-item-option color="medium" (click)="skipDose(med)">
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+              </ion-item-option>
+
+              <!-- UNDO -->
+              <ion-item-option color="warning" *ngIf="med.status === 'taken'" (click)="undoTaken(med)">
+                <ion-icon name="refresh-outline"></ion-icon>
+              </ion-item-option>
+
+              <ion-item-option color="primary" (click)="shareSpecificMed(med)">
+                <ion-icon name="share-outline"></ion-icon>
+              </ion-item-option>
+
+            </ion-item-options>
+
+          </ion-item-sliding>
+
+
+        </ion-list>
+
+        <ng-template #noToday>
+          <div class="empty-state">
+            <ion-icon name="medkit-outline"></ion-icon>
+            <p>No medications scheduled for today yet.</p>
+          </div>
+        </ng-template>
+
+      </div>
+
+
+      <!-- ============================
+           ACCORDION: ADD NEW MED
+           ============================ -->
+      <ion-accordion-group class="home-accordion" expand="inset">
+        <ion-accordion value="add-med">
+          <ion-item slot="header" lines="none">
+            <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+            <ion-label>Add New Medication</ion-label>
+          </ion-item>
+
+          <div class="accordion-content" slot="content">
+            <ion-card class="form-card">
+              <ion-card-content>
+                <ion-item>
+                  <ion-label position="floating">Name</ion-label>
+                  <ion-input [(ngModel)]="newMed.name"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Dosage</ion-label>
+                  <ion-input [(ngModel)]="newMed.dosage"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Time</ion-label>
+                  <ion-input type="time" [(ngModel)]="newMed.time"></ion-input>
+                </ion-item>
+
+                <ion-button expand="block" color="success" class="ion-margin-top" (click)="addMedication()">
+                  <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+                  Add Medication
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-accordion>
+
+        <!-- ============================
+             ACCORDION: FULL SCHEDULE
+             ============================ -->
+        <ion-accordion value="schedule">
+          <ion-item slot="header" lines="none">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-label>Edit Medication Schedule</ion-label>
+          </ion-item>
+
+          <div class="accordion-content" slot="content">
+            <ion-card class="schedule-card">
+              <ion-card-content>
+                <ion-list *ngIf="medications.length > 0; else noMeds" lines="none">
+                  <ion-item *ngFor="let med of medications" class="schedule-item">
+                    <ion-label>
+                      <h2>{{ med.name }}</h2>
+                      <p>{{ med.dosage }} · {{ med.time }}</p>
+                    </ion-label>
+
+                    <!-- 🔹 Square Edit (left) + Delete (right) -->
+                    <ion-buttons slot="end" class="schedule-actions">
+
+                      <!-- EDIT (blue box) -->
+                      <button class="schedule-box edit-box" (click)="openEditModal(med)">
+                        <ion-icon name="create-outline"></ion-icon>
+                      </button>
+
+                      <!-- DELETE (red box) -->
+                      <button class="schedule-box delete-box" (click)="deleteMedication(med.id!, med.name)">
+                        <ion-icon name="trash-outline"></ion-icon>
+                      </button>
+
+                    </ion-buttons>
+
+                  </ion-item>
+                </ion-list>
+
+
+                <ng-template #noMeds>
+                  <div class="empty-state">
+                    <ion-icon name="medkit-outline"></ion-icon>
+                    <p>No medications found.</p>
+                  </div>
+                </ng-template>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+
+    </div> <!-- /content-overlay -->
+
+  </ion-content>
+</ng-container>
+
+<ng-template #loading>
+  <ion-content class="ion-padding">
+    <ion-spinner name="crescent"></ion-spinner>
+  </ion-content>
+</ng-template>

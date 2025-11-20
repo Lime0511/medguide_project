@@ -1,0 +1,92 @@
+<!-- <ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reminders</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reminders</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- 🔹 TODAY'S MEDICATION LOGS -->
+  <h2 class="section-title">Today's Medications</h2>
+
+  <ion-list *ngIf="isLogsReady && todayLogs.length > 0; else noLogs">
+    <ion-item *ngFor="let log of todayLogs" [class]="log.status">
+      <ion-icon slot="start" [name]="log.status === 'taken' ? 'checkmark-circle' :
+                 log.status === 'missed' ? 'close-circle' :
+                 'notifications-outline'">
+      </ion-icon>
+
+      <ion-label>
+        <h3>{{ log.name }}</h3>
+        <p>{{ log.time }} — <strong>{{ log.status | uppercase }}</strong></p>
+      </ion-label>
+
+      <ion-buttons slot="end" *ngIf="log.status === 'upcoming'">
+        <ion-button color="success" fill="clear" (click)="markTaken(log)">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noLogs>
+    <p>No medication logs for today.</p>
+  </ng-template>
+
+  <hr>
+
+  <!-- 🔹 LOCAL NOTIFICATION REMINDERS (EXISTING FEATURE) -->
+  <h2 class="section-title">Active Reminder Notifications</h2>
+
+  <ion-list *ngIf="reminders.length > 0; else emptyState">
+    <ion-item *ngFor="let reminder of reminders">
+      <ion-icon slot="start" name="notifications-outline"></ion-icon>
+      <ion-label>
+        <h2>{{ reminder.title }}</h2>
+        <p>{{ reminder.body }}</p>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button color="primary" fill="clear" (click)="editReminder(reminder)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button color="danger" fill="clear" (click)="cancelReminder(reminder.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #emptyState>
+    <div class="empty">
+      <ion-icon name="notifications-off-outline"></ion-icon>
+      <p>No active reminders</p>
+      <small class="muted-msg">
+        Only upcoming notifications will appear here.
+      </small>
+
+      <ion-button expand="block" fill="outline" color="secondary" routerLink="/timeline">
+        View Full History →
+      </ion-button>
+
+    </div>
+  </ng-template>
+
+  <ion-button expand="block" color="medium" (click)="cancelAllReminders()" *ngIf="reminders.length > 0">
+    Cancel All
+  </ion-button>
+
+</ion-content>

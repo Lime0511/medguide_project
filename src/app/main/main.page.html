@@ -1,0 +1,76 @@
+<ion-split-pane contentId="main-content">
+
+  <!-- SIDE MENU -->
+  <ion-menu contentId="main-content" class="side-menu" type="overlay">
+    <ion-header>
+      <ion-toolbar class="menu-toolbar">
+        <ion-title>MedGuide</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+
+      <!-- Profile block -->
+      <div class="menu-profile">
+        <div class="avatar-ring">
+          <!-- <img src="assets/default-avatar.png" alt="User avatar" /> -->
+          <img
+            src="https://ui-avatars.com/api/?name={{ currentUser?.displayName || 'U' }}&background=ffffff&color=3b82f6&bold=true" />
+
+        </div>
+        <h3>{{ currentUser?.displayName || 'User' }}</h3>
+        <p>{{ currentUser?.email }}</p>
+      </div>
+
+      <!-- MAIN NAV ITEMS -->
+      <ion-list class="menu-list">
+
+        <ion-item routerLink="/home" routerLinkActive="active" lines="none" detail="false">
+          <ion-icon slot="start" class="menu-icon" [name]="isActive('/home') ? 'home' : 'home-outline'">
+          </ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/reminders" routerLinkActive="active" lines="none" detail="false">
+          <ion-icon slot="start" class="menu-icon"
+            [name]="isActive('/reminders') ? 'notifications' : 'notifications-outline'">
+          </ion-icon>
+          <ion-label>Reminders</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/timeline" routerLinkActive="active" lines="none" detail="false">
+          <ion-icon slot="start" class="menu-icon" [name]="isActive('/timeline') ? 'time' : 'time-outline'">
+          </ion-icon>
+          <ion-label>Timeline</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/settings" routerLinkActive="active" lines="none" detail="false">
+          <ion-icon slot="start" class="menu-icon" [name]="isActive('/settings') ? 'settings' : 'settings-outline'">
+          </ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/profile" routerLinkActive="active" lines="none" detail="false">
+          <ion-icon slot="start" class="menu-icon" [name]="isActive('/profile') ? 'person' : 'person-outline'">
+          </ion-icon>
+          <ion-label>Profile</ion-label>
+        </ion-item>
+
+      </ion-list>
+
+      <!-- FOOTER / LOGOUT -->
+      <ion-list class="menu-footer">
+        <ion-item lines="none" detail="false" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline" class="menu-icon"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </ion-list>
+
+    </ion-content>
+  </ion-menu>
+
+
+  <!-- MAIN CONTENT -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+</ion-split-pane>

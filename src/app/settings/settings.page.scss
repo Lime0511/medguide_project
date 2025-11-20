@@ -1,0 +1,278 @@
+/* =======================
+   GLOBAL SETTINGS PAGE STYLES
+========================== */
+
+ion-header {
+  --background: #eaf5ff;  /* Light blue background for header */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize ion-toolbar for a clean header look */
+ion-toolbar {
+  --background: #2563eb;  /* Primary color */
+  --color: white;  /* White text */
+}
+
+/* Title styles */
+ion-title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* =======================
+   CARD STYLES (Appearance, Notifications, etc.)
+========================== */
+
+ion-card {
+  background: rgba(255, 255, 255, 0.85);  /* Light frosted glass effect */
+  backdrop-filter: blur(12px);  /* Apply frosted glass effect */
+  border-radius: 20px;  /* Rounded corners */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Card header styles */
+ion-card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+}
+
+/* Card title styles */
+ion-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* =======================
+   SETTINGS SPECIFIC STYLES
+========================== */
+
+/* APPEARANCE */
+ion-toggle {
+  --background-checked: #2563eb; /* Checked toggle color */
+  --border-radius: 50px;
+}
+
+ion-item {
+  --background: #ffffff;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+/* =======================
+   NOTIFICATIONS (Select Dropdown)
+========================== */
+ion-select {
+  --background: #f7faff;
+  --border-radius: 12px;
+  padding: 12px;
+}
+
+ion-select-option {
+  font-size: 16px;
+}
+
+/* =======================
+   STORAGE BUTTON STYLES (Clear Cache, Clear Storage)
+========================== */
+ion-button {
+  font-size: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  width: 100%;  /* Full-width buttons */
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Colors for buttons */
+ion-button[color="warning"] {
+  --background: #fbbf24;
+  --color: white;
+}
+
+ion-button[color="danger"] {
+  --background: #dc2626;
+  --color: white;
+}
+
+/* Hover effect on buttons */
+ion-button:hover {
+  transform: scale(1.05);  /* Slightly enlarge button on hover */
+}
+
+/* =======================
+   ABOUT SECTION STYLES
+========================== */
+
+ion-card-content p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+ion-card-content strong {
+  font-weight: 600;
+}
+
+/* =======================
+   EMPTY STATE (Centered Text)
+========================== */
+.empty-state {
+  text-align: center;
+  margin-top: 30%;
+  color: #7b7b7b;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* =======================
+   FLOATING SEARCH BAR (Sticky at top)
+========================== */
+.floating-search {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-top: 20px;
+}
+
+.floating-search ion-item {
+  backdrop-filter: blur(12px);
+  --background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================
+   COLLAPSIBLE DATE HEADER (If applicable)
+========================== */
+.date-header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+.date-header ion-icon {
+  transition: transform 0.28s ease;
+}
+
+.date-header ion-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* =======================
+   GLASSMORPHISM FOR SLIDE OPTIONS
+========================== */
+ion-item-option {
+  backdrop-filter: blur(14px);
+  --background: rgba(255, 255, 255, 0.32);
+  --color: #ff4b5c;
+  border-radius: 14px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+ion-item-option:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* ================================
+   GLOBAL DARK MODE STYLES
+=================================== */
+body.dark {
+  background-color: #333;  /* Dark background */
+  color: #fff; /* White text */
+}
+
+/* Light mode default styles */
+body {
+  background-color: #f4f6fa;  /* Light background */
+  color: #333; /* Dark text color */
+}
+
+/* ================================
+   TOGGLE BUTTON STYLES
+=================================== */
+ion-toggle {
+  --background: #ccc;  /* Default background color */
+  --handle-background: #2563eb;  /* Handle color */
+  --border-radius: 50px; /* Rounded toggle */
+}
+
+body.dark ion-toggle {
+  --background: #555;  /* Dark background color */
+  --handle-background: #f1f1f1;  /* Light handle color */
+}
+
+/* ================================
+   TEXT AND OTHER ELEMENTS IN DARK MODE
+=================================== */
+body.dark ion-label,
+body.dark ion-title,
+body.dark .section-title,
+body.dark .date-header {
+  color: white; /* White text for dark mode */
+}
+
+/* ================================
+   CARD AND ITEM STYLES IN DARK MODE
+=================================== */
+body.dark ion-card,
+body.dark ion-item {
+  background-color: #444; /* Dark background for cards */
+  color: #fff; /* White text */
+}
+
+body.dark ion-card-title {
+  color: #fff; /* White text for card titles */
+}
+
+/* ================================
+   BUTTON STYLES IN DARK MODE
+=================================== */
+body.dark ion-button {
+  --background: #2563eb;
+  --color: white;
+}
+
+body.dark ion-button:hover {
+  --background: #1d4ed8;
+}
+
+/* ================================
+   NAVIGATION AND FOOTER IN DARK MODE
+=================================== */
+body.dark .menu-footer ion-item {
+  --background: #555;
+  color: white;
+}
+
+/* ================================
+   LIGHT MODE STYLES (Default)
+=================================== */
+
+/* For light mode, we’ll ensure everything is properly styled */
+body {
+  background-color: #f4f6fa;  /* Light blueish background */
+  color: #333; /* Default dark text color */
+}
+
+ion-card, ion-item {
+  --background: #fff; /* White background for cards/items */
+  --color: #333; /* Default text color */
+}
+
+ion-button {
+  --background: #2563eb;
+  --color: white;
+}
+
+ion-button:hover {
+  --background: #1d4ed8;
+}
+
+

@@ -1,0 +1,121 @@
+/* ================================
+   LOGIN PAGE BACKGROUND (Gradient)
+=================================== */
+
+/* Apply gradient directly to ion-content */
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4e73df, #1d68f3) !important;  /* Blue gradient */
+  padding: 20px;
+}
+
+/* ================================
+   AUTH CARD STYLES (Login Form Container)
+=================================== */
+.auth-card {
+  width: 100%;
+  max-width: 420px;  /* Max width of the login form */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);  /* Slightly transparent background */
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+  backdrop-filter: blur(10px);  /* Frosted glass effect */
+  margin: auto;
+}
+
+/* ================================
+   HEADER STYLES (Welcome Back Text)
+=================================== */
+ion-card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+ion-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* ================================
+   FORM INPUT STYLES (Email and Password)
+=================================== */
+ion-item {
+  --background: #fff;
+  --border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for items */
+  font-size: 16px;
+}
+
+/* Floating label styling */
+ion-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+
+/* ================================
+   REMEMBER ME TOGGLE
+=================================== */
+ion-toggle {
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --border-radius: 12px;
+}
+
+/* ================================
+   BUTTON STYLES (Login and Register)
+=================================== */
+ion-button {
+  font-size: 18px;
+  padding: 12px 20px;
+  width: 100%;  /* Full-width buttons */
+  margin-bottom: 16px;
+  border-radius: 12px;
+  transition: 0.3s all ease;
+
+  /* Primary login button style */
+  &.primary {
+    --background: #2563eb;
+    --color: white;
+  }
+
+  /* Register button style */
+  &.clear {
+    --background: transparent;
+    --color: #2563eb;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ================================
+   RESPONSIVENESS
+=================================== */
+@media (max-width: 767px) {
+  .auth-card {
+    max-width: 100%;  /* Full width on smaller screens */
+    padding: 15px;  /* Reduce padding on mobile for better fitting */
+  }
+
+  ion-input {
+    font-size: 14px;  /* Adjust input size on small screens */
+  }
+
+  ion-button {
+    font-size: 16px;  /* Adjust button font size for mobile */
+  }
+}

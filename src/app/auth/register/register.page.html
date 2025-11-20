@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Create Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding register-content">
+
+  <ion-card class="auth-card">
+  <ion-card-title>
+  Welcome to MedGuide!
+  <span class="journey-text">Lets Start this Journey!</span>
+</ion-card-title>
+
+    <ion-card-content>
+
+      <!-- NAME -->
+      <ion-item>
+        <ion-label position="floating">Full Name</ion-label>
+        <ion-input [(ngModel)]="name"></ion-input>
+      </ion-item>
+
+      <!-- EMAIL -->
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+
+      <!-- PASSWORD -->
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password"></ion-input>
+
+        <ion-button fill="clear" size="small" slot="end" (click)="togglePassword()">
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <!-- PASSWORD STRENGTH BAR -->
+      <div class="strength-bar">
+        <div [style.width.%]="passwordStrength" [ngClass]="strengthColor"></div>
+      </div>
+
+      <!-- CONFIRM PASSWORD -->
+      <ion-item>
+        <ion-label position="floating">Confirm Password</ion-label>
+        <ion-input [type]="showConfirm ? 'text' : 'password'" [(ngModel)]="confirm"></ion-input>
+
+        <ion-button fill="clear" size="small" slot="end" (click)="toggleConfirm()">
+          <ion-icon [name]="showConfirm ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <!-- MATCH ERROR -->
+      <p *ngIf="password && confirm && password !== confirm" class="error-text">
+        ⚠️ Passwords do not match.
+      </p>
+
+      <ion-button expand="block" color="primary" class="ion-margin-top" (click)="register()">
+        Register
+      </ion-button>
+
+      <ion-button expand="block" fill="clear" routerLink="/login">
+        Already have an account? Login
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,142 @@
+/* ================================
+   PROFILE PAGE STYLES
+=================================== */
+
+/* Global styles */
+ion-content {
+  --background: #f4f6fa;  /* Light background for the profile page */
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;  /* Easy-to-read font */
+}
+
+/* PROFILE PHOTO STYLES */
+.profile-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Avatar Image */
+ion-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;  /* Circular shape */
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+ion-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Ensure the image covers the avatar */
+}
+
+/* Change Photo Button */
+.change-photo-btn {
+  font-size: 14px;
+  color: #2563eb;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.change-photo-btn input {
+  display: none;
+}
+
+/* ================================
+   GLASS EFFECT FOR PROFILE CARD
+=================================== */
+
+/* Frosted glass effect for all containers */
+ion-card {
+  background: rgba(255, 255, 255, 0.6);  /* Light background with transparency */
+  backdrop-filter: blur(12px);  /* Apply frosted glass effect */
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);  /* Soft shadow */
+  padding: 20px;
+}
+
+/* Form elements inside the card */
+ion-item {
+  --background: rgba(255, 255, 255, 0.85);  /* Slightly opaque background */
+  --border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for items */
+  font-size: 16px;
+}
+
+ion-label {
+  font-weight: 600;
+}
+
+/* Inputs */
+ion-input {
+  font-size: 16px; /* Larger font size for readability */
+  color: #333;
+  padding: 12px 15px;
+  --border-radius: 10px;
+}
+
+/* Read-Only Email Input */
+ion-input[readonly] {
+  background: #f1f1f1; /* Light grey background for read-only inputs */
+  color: #777; /* Lighter text color */
+}
+
+/* ================================
+   BUTTON STYLES (Accessibility Friendly)
+=================================== */
+
+/* Larger buttons for elderly accessibility */
+ion-button {
+  font-size: 18px;  /* Larger font size for better readability */
+  padding: 16px 0;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  height: 50px;  /* Larger button height for easier tapping */
+}
+
+/* Save Changes Button */
+ion-button[color="primary"] {
+  --background: #2563eb;
+  --color: white;
+}
+
+/* Change Password Button */
+ion-button[color="medium"] {
+  --background: #d1d5db;
+  --color: #1f2933;
+}
+
+/* Delete Account Button */
+ion-button[color="danger"] {
+  --background: #dc2626;
+  --color: white;
+}
+
+/* Hover Effects for Buttons */
+ion-button:hover {
+  transform: scale(1.05);  /* Slight scale effect */
+}
+
+/* ================================
+   RESPONSIVENESS
+=================================== */
+@media (max-width: 767px) {
+  .profile-center {
+    margin-top: 20px;
+  }
+
+  ion-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  ion-button {
+    font-size: 16px; /* Slightly smaller buttons for mobile */
+  }
+}
